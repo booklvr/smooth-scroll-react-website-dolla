@@ -1,8 +1,7 @@
-import styled from 'styled-components';
-import {Link as LinkR} from 'react-router-dom';
-import {Link as LinkS } from 'react-scroll';
-import {FaBars} from 'react-icons/fa';
-
+import styled from 'styled-components'
+import { Link as LinkR } from 'react-router-dom'
+import { Link as LinkS } from 'react-scroll'
+import { FaBars } from 'react-icons/fa'
 
 const Nav = styled.nav`
   background: #000;
@@ -18,7 +17,7 @@ const Nav = styled.nav`
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
   }
-`;
+`
 
 const NavbarContainer = styled.div`
   display: flex;
@@ -28,7 +27,7 @@ const NavbarContainer = styled.div`
   width: 100%;
   padding: 0 24px;
   max-width: 1100px;
-`;
+`
 
 const NavLogo = styled(LinkR)`
   color: #fff;
@@ -38,9 +37,9 @@ const NavLogo = styled(LinkR)`
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-left: 24px;      
+  margin-left: 24px;
   text-decoration: none;
-`;
+`
 
 const MobileIcon = styled.div`
   display: none;
@@ -55,7 +54,7 @@ const MobileIcon = styled.div`
     cursor: pointer;
     color: #fff;
   }
-`;
+`
 
 const NavMenu = styled.ul`
   display: flex;
@@ -67,11 +66,11 @@ const NavMenu = styled.ul`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
+`
 
 const NavItem = styled.li`
-    height: 80px;
-`;
+  height: 80px;
+`
 
 const NavLinks = styled(LinkS)`
   color: #fff;
@@ -85,7 +84,7 @@ const NavLinks = styled(LinkS)`
   &.active {
     border-bottom: 3px solid #01bf71;
   }
-`;
+`
 
 const NavBtn = styled.nav`
   display: flex;
@@ -94,7 +93,7 @@ const NavBtn = styled.nav`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
+`
 const NavBtnLink = styled(LinkR)`
   border-radius: 50px;
   background: #01bf71;
@@ -113,39 +112,35 @@ const NavBtnLink = styled(LinkR)`
     background: #fff;
     color: #010606;
   }
+`
 
-`;
-
-
-const Navbar = () => {
+const Navbar = ({ toggle }) => {
   return (
-    <>
-      <Nav>
-        <NavbarContainer>
-          <NavLogo to="/">dolla</NavLogo>
-          <MobileIcon>
-            <FaBars/>
-          </MobileIcon>
-          <NavMenu>
-            <NavItem>
-              <NavLinks to="about">About</NavLinks>
-            </NavItem>
-            <NavItem>
-              <NavLinks to="discover">Discover</NavLinks>
-            </NavItem>
-            <NavItem>
-              <NavLinks to="services">Services</NavLinks>
-            </NavItem>
-            <NavItem>
-              <NavLinks to="signup">Sign Up</NavLinks>
-            </NavItem>
-          </NavMenu>
-          <NavBtn>
-            <NavBtnLink to="/signin">Sign In</NavBtnLink>
-          </NavBtn>
-        </NavbarContainer>
-      </Nav>
-    </>
+    <Nav>
+      <NavbarContainer>
+        <NavLogo to='/'>dolla</NavLogo>
+        <MobileIcon onClick={toggle}>
+          <FaBars />
+        </MobileIcon>
+        <NavMenu>
+          <NavItem>
+            <NavLinks to='about'>About</NavLinks>
+          </NavItem>
+          <NavItem>
+            <NavLinks to='discover'>Discover</NavLinks>
+          </NavItem>
+          <NavItem>
+            <NavLinks to='services'>Services</NavLinks>
+          </NavItem>
+          <NavItem>
+            <NavLinks to='signup'>Sign Up</NavLinks>
+          </NavItem>
+        </NavMenu>
+        <NavBtn>
+          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+        </NavBtn>
+      </NavbarContainer>
+    </Nav>
   )
 }
 
