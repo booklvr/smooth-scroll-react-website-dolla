@@ -1,12 +1,14 @@
 import styled from 'styled-components'
+import React, { useState, useEffect } from 'react'
 import { Link as LinkR } from 'react-router-dom'
-import { Link as LinkS } from 'react-scroll'
+import { Link as LinkS, animateScroll as scroll } from 'react-scroll'
 import { FaBars } from 'react-icons/fa'
+import { IconContext } from 'react-icons/lib'
 
 const Nav = styled.nav`
-  background: #000;
+  background: ${({ scrollNav }) => (scrollNav ? '#000' : 'transparent')};
   height: 80px;
-  /* margin-top: -80px; */
+  margin-top: -80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,32 +118,56 @@ const NavBtnLink = styled(LinkR)`
 `
 
 const Navbar = ({ toggle }) => {
+  const [scrollNav, setScrollNav] = useState(false)
+
+  const changeNav = () => {
+    if (window.scrollY > 80) {
+      setScrollNav(true)
+    } else {
+      setScrollNav(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeNav)
+  }, [])
+
+  const toggleHome = () => {
+    scroll.scrollToTop()
+  }
+
   return (
-    <Nav>
-      <NavbarContainer>
-        <NavLogo to='/'>dolla</NavLogo>
-        <MobileIcon onClick={toggle}>
-          <FaBars />
-        </MobileIcon>
-        <NavMenu>
-          <NavItem>
-            <NavLinks to='about'>About</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='discover'>Discover</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='services'>Services</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='signup'>Sign Up</NavLinks>
-          </NavItem>
-        </NavMenu>
-        <NavBtn>
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
-        </NavBtn>
-      </NavbarContainer>
-    </Nav>
+    <>
+      <IconContext.Provider value={{ color: '#fff' }}>
+        <Nav scrollNav={scrollNav}>
+          <NavbarContainer>
+            <NavLogo to='/' onClick={toggleHome}>
+              dolla
+            </NavLogo>
+            <MobileIcon onClick={toggle}>
+              <FaBars />
+            </MobileIcon>
+            <NavMenu>
+              <NavItem>
+                <NavLinks to='about'>About</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='discover'>Discover</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='services'>Services</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='signup'>Sign Up</NavLinks>
+              </NavItem>
+            </NavMenu>
+            <NavBtn>
+              <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+            </NavBtn>
+          </NavbarContainer>
+        </Nav>
+      </IconContext.Provider>
+    </>
   )
 }
 

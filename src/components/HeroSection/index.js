@@ -130,9 +130,8 @@ const HeroSection = () => {
             to='singup'
             onMouseEnter={onHover}
             onMouseLeave={onHover}
-            dark
-            primary
-            fontBig
+            dark='true'
+            primary='true'
           >
             Get Started {hover ? <ArrowForward /> : <ArrowRight />}
           </Button>

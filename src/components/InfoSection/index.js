@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import React from 'react'
-import { Button } from 'react-scroll'
+import { Button } from '../ButtonElements'
 
 const InfoContainer = styled.div`
   color: #fff;
@@ -40,13 +40,13 @@ const InfoRow = styled.div`
 const Column1 = styled.div`
   margin-bottom: 15px;
   padding: 0 15px;
-  grid-area: cl1;
+  grid-area: col1;
 `
 
 const Column2 = styled.div`
   margin-bottom: 15px;
   padding: 0 15px;
-  grid-area: cl2;
+  grid-area: col2;
 `
 
 const TextWrapper = styled.div`
@@ -70,7 +70,7 @@ const Heading = styled.h1`
   font-size: 48px;
   line-height: 1.1;
   font-weight: 600;
-  color: ${({ lightText }) => (lightText ? '#f7f8fa' : '010606')};
+  color: ${({ lightText }) => (lightText ? '#f7f8fa' : '#010606')};
 
   @media screen and (max-width: 480px) {
     font-size: 32px;
@@ -100,25 +100,50 @@ const Img = styled.img`
   padding-right: 0;
 `
 
-const InfoSection = () => {
+const InfoSection = ({
+  lightBg,
+  id,
+  topLine,
+  headline,
+  lightText,
+  description,
+  darkText,
+  buttonLabel,
+  alt,
+  imgStart,
+  img,
+  primary,
+  dark,
+}) => {
   return (
     <>
-      <InfoContainer>
+      <InfoContainer lightBg={lightBg} id={id}>
         <InfoWrapper>
-          <InfoRow>
+          <InfoRow imgStart={imgStart}>
             <Column1>
               <TextWrapper>
-                <TopLine>TopLine</TopLine>
-                <Heading>Heading</Heading>
-                <Subtitle>Subtitle</Subtitle>
+                <TopLine>{topLine}</TopLine>
+                <Heading lightText={lightText}>{headline}</Heading>
+                <Subtitle darkText={darkText}>{description}</Subtitle>
                 <BtnWrap>
-                  <Button to='home'>Button</Button>
+                  <Button
+                    to='home'
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact='true'
+                    offset={-80}
+                    primary={primary ? 1 : 0}
+                    dark={dark ? 1 : 0}
+                  >
+                    {buttonLabel}
+                  </Button>
                 </BtnWrap>
               </TextWrapper>
             </Column1>
             <Column2>
               <ImgWrap>
-                <Img />
+                <Img src={img} alt={alt} />
               </ImgWrap>
             </Column2>
           </InfoRow>
